@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BURU</title>
+<style>
+
+.page {
+    height: 200dvh;
+    width: 100dvw;
+    position: relative;
+}
+
+.top {
+    position: absolute;
+    background: blue;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.panel {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background: green;
+}
+button {
+    font-size: 24px;
+}	
+
+</style>
+</head>
+<body>
+    <div class="page">
+	<div class="panel">
+	    <button>Push me</button>
+	</div>
+	<div class="top" id="top">
+	    Hello
+	</div>
+  </div>
+    
+<script>
+    let toggle = 0;
+    function doit() {
+	if (toggle) {
+	    window.scrollTo({
+		top: 0
+	    });
+	} else {
+	    window.scrollTo({
+		top: 120
+	    });
+	}
+	toggle = 1 - toggle;
+    }
+
+    setInterval(doit, 2000);
+  
+</script>    
+</body>
+</html>
