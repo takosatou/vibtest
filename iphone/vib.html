@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BURU</title>
 <style>
 
@@ -35,31 +34,55 @@ button {
 </style>
 </head>
 <body>
-    <div class="page">
-	<div class="panel">
-	    <button>Push me</button>
-	</div>
-	<div class="top" id="top">
-	    Hello
-	</div>
+<div class="page">
+  <div class="panel">
+    <button id="button">Push me</button>
+    <input id="value">
   </div>
+  <div class="top" id="top">
+    Hello
+  </div>
+</div>
     
 <script>
-    let toggle = 0;
-    function doit() {
-	if (toggle) {
-	    window.scrollTo({
-		top: 0
-	    });
-	} else {
-	    window.scrollTo({
-		top: 120
-	    });
-	}
-	toggle = 1 - toggle;
-    }
+  const button = document.getElementById("button")
+  const value = document.getElementById("value")
 
-    setInterval(doit, 2000);
+  let running = false
+  
+  function prepare() {
+      window.scrollTo({
+	  top: 120
+      })
+  }
+  function vib() {
+      window.navigator.vibrate(2000)
+      window.scrollTo({
+	  top: 0
+      })
+  }
+
+  function start() {
+      vib()      
+      const ms = new Date().getMilliseconds()
+      value.value = ms
+      if (running) {
+          setTimeout(prepare, 500)
+          setTimeout(start, 2000 - ms)
+      }
+  }
+
+  function onClick() {
+      if (running) {
+          running = false
+          button.innerHTML = 'Start'
+      } else {
+          button.innerHTML = 'Stop'
+          running = true          
+          start()
+      }
+  }
+  button.addEventListener("click", onClick)
   
 </script>    
 </body>
